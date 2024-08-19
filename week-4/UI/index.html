@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function calculate() {
+            const amount = parseInt(document.getElementById("amount").value);
+            const time = parseInt(document.getElementById("time").value);
+            const rate = parseInt(document.getElementById("rate").value);
+            if (rate && amount && time) {
+                fetch(`http://localhost:3000/interest?amount=${amount}&time=${time}&rate=${rate}`)
+                    .then((response) => response.json())
+                    .then((res) => document.getElementById("interest").innerHTML = `Interest: ${res.interest}`);
+            } else {
+                window.alert("Insert all values");
+            }
+        }
+    </script>
+    <input type="number" placeholder="amount" id="amount" name="amount" />
+    <input type="number" placeholder="time" id="time" name="time" />
+    <input type="number" placeholder="rate" id="rate" name="rate" />
+    <button type="button" onclick="calculate();">Calculate</button>
+    <div id="interest"></div>
+</body>
+
+</html>
